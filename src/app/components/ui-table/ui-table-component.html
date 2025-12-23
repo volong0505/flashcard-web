@@ -1,0 +1,30 @@
+<div class="ctn">
+    <div class="table-ctn">
+        @if(customColumn && customColumn.length > 0) {
+        <nz-table #basicTable [nzData]="this.list" [nzShowPagination]="false">
+            <thead>
+                <tr>
+                    @for(col of customColumn; track col?.name) {
+                    <th>{{col?.name}}</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for(item of list; track item._id) {
+                <tr>
+                    @for(col of customColumn; track col.name) {
+
+                    <td>{{getValue(col.value, item._id)}}</td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </nz-table>
+
+        <div class="pagin-ctn">
+            <nz-pagination [nzPageSize]="pageSize" [nzPageIndex]="page" [nzTotal]="total" [nzSize]="'small'"
+                (nzPageIndexChange)="tableChangePage($event)"></nz-pagination>
+        </div>
+        }
+    </div>
+</div>

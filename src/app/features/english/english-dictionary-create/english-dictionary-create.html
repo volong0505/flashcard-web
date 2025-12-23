@@ -1,0 +1,84 @@
+<nz-drawer [nzClosable]="false" nzWidth="500px" nzPlacement="left" [nzKeyboard]="true" (nzOnClose)="closeDrawer()"
+    [nzVisible]="createState.onCreate()">
+    <ng-container *nzDrawerContent>
+
+        <div>
+            <div class="form-container">
+                <form nz-form [formGroup]="validateForm" class="login-form">
+
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input type="text" nz-input formControlName="word" placeholder="Word"
+                                nzVariant="underlined" /> </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input type="text" nz-input formControlName="translation" placeholder="Translation"
+                                nzVariant="underlined" />
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control>
+                            <textarea type="text" nz-input formControlName="definition" placeholder="Definition"
+                                nzVariant="underlined"></textarea>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input type="text" nz-input formControlName="ipa" placeholder="IPA"
+                                nzVariant="underlined" />
+                        </nz-form-control>
+                    </nz-form-item>
+
+                      <nz-form-item>
+                        <nz-form-control [nzSm]="10" [nzXs]="24">
+                            <nz-select class="select-left" formControlName="level" nzVariant="underlined"
+                                nzPlaceHolder="Level">
+                                <nz-option nzValue="A1" nzLabel="A1"></nz-option>
+                                <nz-option nzValue="A2" nzLabel="A2"></nz-option>
+                                <nz-option nzValue="B1" nzLabel="B1"></nz-option>
+                                <nz-option nzValue="B2" nzLabel="B2"></nz-option>
+                                <nz-option nzValue="C1" nzLabel="C1"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+
+                        <nz-form-control [nzSm]="14" [nzXs]="24">
+                            <nz-select class="select-right" formControlName="category" nzVariant="underlined"
+                                nzPlaceHolder="Category">
+                                @for( category of englishCategoryOptions; track category.value) {
+                                <nz-option [nzValue]="category.value" [nzLabel]="category.label"></nz-option>
+                                }
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                                        <nz-form-item>
+                        <nz-form-control>
+                            <textarea formControlName="usageNote" nz-input rows="1" placeholder="Usage Note"
+                                nzVariant="underlined"></textarea>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                </form>
+
+                <div>
+                    <button nz-button nzType="primary" class="submit-btn" (click)="submitForm()">
+                        <nz-icon nzType="save" />
+                        Save
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        @if(isExisted.status) {
+        <div class="alert">
+            <nz-alert nzType="warning" nzMessage="This word already exists" nzShowIcon>
+            </nz-alert>
+        </div>
+        }
+    </ng-container>
+</nz-drawer>

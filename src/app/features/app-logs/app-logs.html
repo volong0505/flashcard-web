@@ -1,0 +1,20 @@
+<div class="ctn">
+
+    <nz-float-button-group nzIcon="code" nzType="primary" nzTrigger="click" style="right: 190px" [nzOpen]="isOpen"
+        (click)="openChange()">
+
+        <div class="ctn-log">
+            <div class="ctn-log-main">
+                @for(i of store.logs(); track i.log) {
+                <p> > <span nz-typography [nzType]="getTypeLog(i.status)">{{i.log}}</span> </p>
+                }
+                @if(store.isLoading()) {
+                <p>> loading<span class="dots"></span></p>
+                }
+
+            </div>
+
+        </div>
+
+    </nz-float-button-group>
+</div>

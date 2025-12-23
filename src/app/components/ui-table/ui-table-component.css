@@ -1,0 +1,20 @@
+.table-ctn {
+    border-radius: 8px;
+  }
+
+
+.table-header {
+    margin-bottom: -10px;
+}
+
+.pagin-ctn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+
+.action {
+    text-align: center;
+    font-size: 15px;
+}

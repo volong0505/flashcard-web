@@ -1,0 +1,38 @@
+<nz-card>
+
+    <div>
+        <div class="card-header">
+            <div>
+                <span class="word">{{state.flashcard().vocabulary.translation}}</span>
+            </div>
+
+            <div class="tags">
+                <!-- <shared-ui-tag-component [tagText]="state.flashcard().vocabulary.category" /> -->
+                
+            </div>
+
+            <div class="check-button">
+                <button-component buttonText="Next" (shareClicked)="nextFlashcard()" />
+
+                <!-- <button nz-button nzType="primary" (click)="nextFlashcard()">
+        Next
+      <nz-icon nzType="right" />
+      </button> -->
+            </div>
+        </div>
+
+        <div class="card-center">
+
+            <div class="meaning">
+                <span>{{state.flashcard().vocabulary.definition}}</span>
+            </div>
+
+            <div class="word">
+                <h2>{{state.flashcard().vocabulary.word}}</h2>
+            </div>
+
+        </div>
+
+ 
+    </div>
+</nz-card>

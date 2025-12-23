@@ -1,0 +1,68 @@
+<nz-card>
+
+    <div>
+        <div class="card-header">
+            <div>
+                <span class="word">{{store.flashcard().vocabulary.translation}}</span>
+            </div>
+
+            <div class="tags">
+                <tag-component [tagText]="store.flashcard().vocabulary.category" />
+            </div>
+
+            <div class="check-button">
+                <button-component [disabled]="!isCorrect()" buttonText="Next" (shareClicked)="nextFlashcard()" />
+            </div>
+        </div>
+
+        <div class="card-center">
+            <div>
+                <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="onCheck()">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <!-- <input [(ngModel)]="value" [nzStatus]="status" (ngModelChange)="compare()" nz-input
+                                nzSize="large" [ngModelOptions]="{standalone: true}" /> -->
+
+                            <nz-input-wrapper>
+
+                                <input nz-input formControlName="word" />
+                                <nz-icon (click)="onCheck()" nzInputSuffix [nzType]="this.inputStatus().type" [style.font-size.px]="16"
+                                    [style.color]="this.inputStatus().color" />
+
+                            </nz-input-wrapper>
+
+                            
+                        </nz-form-control>
+                        
+                    </nz-form-item>
+
+                </form>
+                
+            </div>
+
+
+            @if(this.isCorrect() == true) {
+            <div class="hide">
+                <div>
+                    <span>{{store.flashcard().vocabulary.ipa}}</span>
+                </div>
+            </div>
+
+            }
+        </div>
+
+        <div class="card-footer">
+            <div class="hint">
+                <a class="hint-text" (click)="hint()"> <nz-icon nzType="bulb" nzTheme="outline" /> Get a hint</a>
+            </div>
+
+            @if(this.isCorrect() == true) {
+            <div class="memorized" (click)="memorizedClick()">
+                <a>
+                    Already memorized
+                </a>
+            </div>
+            }
+        </div>
+    </div>
+</nz-card>

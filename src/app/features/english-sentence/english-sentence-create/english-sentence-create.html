@@ -1,0 +1,26 @@
+<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="10">
+            <nz-form-item>
+                <nz-form-label nzFor="sentence">Sentence</nz-form-label>
+                <nz-form-control>
+                    <textarea rows="1" nz-input formControlName="sentence"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+          <div nz-col [nzSpan]="10">
+            <nz-form-item>
+                <nz-form-label nzFor="sentence">Translation</nz-form-label>
+                <nz-form-control>
+                    <textarea rows="1" nz-input  formControlName="translation"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+
+        <div nz-col [nzSpan]="4" class="button">
+          <button-component buttonText="Save" (click)="submitForm()"/>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,40 @@
+  .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 30px 16px 0;
+    float: left;
+  }
+
+  .header-menu {
+    line-height: 64px;
+  }
+
+  nz-sider {
+    background-color: #fff;
+    min-height: 360px;
+    border-right: 0;
+  }
+
+  .menu {
+    padding-top: 10px;
+  }
+
+  .inner-layout {
+    padding: 15px
+  }
+
+  nz-content {
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    min-height: 95vh;
+    padding: 10px
+  }
+
+  .app-logs {
+    position: fixed;
+    bottom: 0;
+    /* top, right, bottom, left */
+    right: 0;
+    z-index: 9999;
+  }

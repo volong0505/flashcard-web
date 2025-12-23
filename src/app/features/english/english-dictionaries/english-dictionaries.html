@@ -1,0 +1,41 @@
+<div class="ctn">
+  <div class="table-ctn">
+    <div class="table-header">
+      <div nz-row>
+        <div nz-col nzSpan="12">
+          <div nz-flex>
+
+            <div class="btn">
+              <button-component buttonText="Create" (shareClicked)="createState.openDrawer()" />
+            </div>
+
+            <div>
+              <form nz-form [formGroup]="searchForm" (ngSubmit)="submitForm()">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-input-group [nzSuffix]="suffixIconSearch">
+                      <input formControlName="keyword" type="text" nz-input placeholder="Search" />
+                    </nz-input-group>
+                    <ng-template #suffixIconSearch>
+                      <nz-icon nzType="search" />
+                    </ng-template>
+                  </nz-form-control>
+                </nz-form-item>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div nz-col nzSpan="12">
+          <div class="statistical">
+            <span>
+              <!-- Total: {{store.list.total()}} -->
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <ui-table-component (pageChange)="pageChange($event)" [customColumn]="this.tableColumn" [list]="listStore.list()" [pageSize]="pageSize" [total]="listStore.total()"/>
+  </div>
+</div>

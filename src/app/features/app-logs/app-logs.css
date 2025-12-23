@@ -1,0 +1,61 @@
+   .ctn {
+       height: 65vh;
+       position: relative;
+   }
+
+   nz-float-button-group {
+       position: absolute;
+   }
+
+   .ctn-log {
+       width: 300px;
+       height: 400px;
+       /* margin-right: 15em; */
+       box-shadow: rgba(0, 0, 0, 0.02) 0px 12px 32px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+       border-radius: 12px;
+       background-color:rgb(76, 102, 122);
+       opacity: 0.9;
+   }
+
+   .ctn-log-main {
+       padding: 2em 1em;
+   }
+
+   p,
+   span {
+       font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace;
+       color:rgb(206, 209, 212);
+       text-transform: lowercase;
+   }
+
+   .loader {
+       font-family: monospace;
+       /* Optional: Makes the text look clean */
+       font-size: 1.5rem;
+       display: flex;
+       align-items: flex-end;
+   }
+
+
+   .dots::after {
+       content: '';
+       animation: dots 1.5s steps(3, end) infinite;
+   }
+
+   @keyframes dots {
+       0% {
+           content: '';
+       }
+
+       33% {
+           content: '.';
+       }
+
+       66% {
+           content: '..';
+       }
+
+       100% {
+           content: '...';
+       }
+   }

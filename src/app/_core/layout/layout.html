@@ -1,0 +1,30 @@
+<nz-layout>
+    <nz-header nzTheme="light" nzMode="inline">
+        <div class="logo"></div>
+
+    </nz-header>
+    <nz-layout>
+        <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+            <ul class="menu" nz-menu nzTheme="light" nzMode="inline">
+                @for (item of sidebarItem; track item.label) {
+                <li nz-menu-item *ngIf="!item.hidden" [routerLink]="item.path">
+                    <span nz-icon [nzType]="item.icon"></span>
+                    <span>{{item.label}}</span>
+                </li>
+                }
+            </ul>
+        </nz-sider>
+        <nz-layout class="inner-layout">
+            <nz-content>
+                <div class="app-logs">
+                    <app-logs />
+                </div>
+                <div class="content">
+                    <router-outlet />
+
+                </div>
+
+            </nz-content>
+        </nz-layout>
+    </nz-layout>
+</nz-layout>
