@@ -1,7 +1,13 @@
 form {
-        padding: 10px;
+  padding: 10px;
 }
 
 textarea {
   border-radius: 6px;
+}
+
+nz-select {
+  width: 100%;
+  border-radius: 6px;
+
 }

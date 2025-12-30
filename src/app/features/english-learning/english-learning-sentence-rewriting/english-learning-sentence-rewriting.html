@@ -1,12 +1,9 @@
 <nz-card>
     <div>
         <div class="card-header">
-            <div>
-                <span class="word">{{store.flashcard().data.vocabulary?.translation}}</span>
-            </div>
-
-            <div class="tags">
-                <tag-component [tagText]="store.flashcard().data.vocabulary?.category" />
+            <div class="sentence">
+                <span> {{this.store.flashcard().data.sentence?.translation}}
+                </span>
             </div>
 
             <div class="check-button">
@@ -16,6 +13,7 @@
 
         <div class="card-center">
             <div>
+
                 <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="onCheck()">
                     <nz-form-item>
                         <nz-form-control>
@@ -24,42 +22,33 @@
 
                             <nz-input-wrapper>
 
-                                <input nz-input formControlName="word" />
-                                <nz-icon (click)="onCheck()" nzInputSuffix [nzType]="this.inputStatus().type" [style.font-size.px]="16"
-                                    [style.color]="this.inputStatus().color" />
+                                <input nz-input formControlName="sentence" />
+                                <nz-icon (click)="onCheck()" nzInputSuffix [nzType]="this.inputStatus().type"
+                                    [style.font-size.px]="16" [style.color]="this.inputStatus().color" />
 
                             </nz-input-wrapper>
                         </nz-form-control>
-                        
+
                     </nz-form-item>
 
                 </form>
-                
-            </div>
 
-
-            @if(this.isCorrect() == true) {
-            <div class="hide">
+                @if(this.showSentence) {
                 <div>
-                    <span>{{store.flashcard().data.vocabulary?.ipa}}</span>
+                    <span>
+                        {{this.store.flashcard().data.sentence?.sentence}}
+                    </span>
                 </div>
-            </div>
 
-            }
+                }
+
+            </div>
         </div>
 
         <div class="card-footer">
             <div class="hint">
                 <a class="hint-text" (click)="hint()"> <nz-icon nzType="bulb" nzTheme="outline" /> Get a hint</a>
             </div>
-
-            @if(this.isCorrect() == true) {
-            <div class="memorized" (click)="memorizedClick()">
-                <a>
-                    Already memorized
-                </a>
-            </div>
-            }
         </div>
     </div>
 </nz-card>

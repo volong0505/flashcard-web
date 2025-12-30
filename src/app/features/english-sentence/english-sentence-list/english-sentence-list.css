@@ -44,3 +44,19 @@ button {
     font-size: 14px;
     font-style: bold;
 }
+
+.editable-cell {
+    position: relative;
+    padding: 5px 12px;
+    cursor: pointer;
+}
+
+nz-select {
+    width: 100%;
+}
+
+/* .editable-row:hover .editable-cell {
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    padding: 4px 11px;
+} */

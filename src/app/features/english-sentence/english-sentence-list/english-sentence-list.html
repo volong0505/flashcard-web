@@ -1,1 +1,56 @@
-  <ui-table-component (pageChange)="pageChange($event)" [customColumn]="this.tableColumn" [list]="listStore.list()" [pageSize]="pageSize" [total]="listStore.total()"/>
+  <!-- <ui-table-component (pageChange)="pageChange($event)" [customColumn]="this.tableColumn" [list]="listStore.list()" [pageSize]="pageSize" [total]="listStore.total()"/> -->
+ <div class="ctn">
+    <div class="table-ctn">
+  <nz-table #editRowTable  [nzData]="listStore.list()" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th nzWidth="35%">Sentence </th>
+          <th nzWidth="35%">Translation</th>
+          <th nzWidth="20%">Words used</th>
+          <th nzWidth="10%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (data of listStore.list(); track data) {
+          <tr class="editable-row">
+            <td>
+              <div class="editable-cell" [hidden]="editId === data._id && editCol == 'sentence'" (click)="startEdit(data._id, 'sentence')">
+                {{ data.sentence }}
+              </div>
+              <textarea [hidden]="editId !== data._id  || editCol !== 'sentence'" type="text" nz-input [(ngModel)]="data.sentence" (blur)="stopEdit(data.sentence)"></textarea>
+            </td>
+
+           <td>
+              <div class="editable-cell" [hidden]="editId === data._id && editCol == 'translation'" (click)="startEdit(data._id, 'translation')">
+                {{ data.translation }}
+              </div> 
+              <textarea [hidden]="editId !== data._id  || editCol !== 'translation'" type="text" nz-input [(ngModel)]="data.translation" (blur)="stopEdit(data.translation)"></textarea>
+            </td>
+
+               <td>
+              <div class="editable-cell" [hidden]="editId === data._id && editCol == 'words'" (click)="startEdit(data._id, 'words')">
+                @for(word of data.words; track word) {
+                  <tag-component [tagText]="word"/>
+                }
+              </div>
+
+                <nz-select (nzOpenChange)="handleOpenChange($event)" [hidden]="editId !== data._id || editCol !== 'words'" nzMode="tags" [(ngModel)]="data.words"  (ngModelChange)="changeWords(data.words)">
+                @for (option of listOfOption; track option) {
+                  <nz-option [nzLabel]="option" [nzValue]="option"></nz-option>
+                }
+                </nz-select>
+            </td>
+
+            <td>
+              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" >Delete</a>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </nz-table>
+      <div class="pagin-ctn">
+            <nz-pagination [nzPageSize]="pageSize" [nzTotal]="listStore.total()" [nzSize]="'small'"
+                (nzPageIndexChange)="pageChange($event)"></nz-pagination>
+        </div>
+           </div>
+</div>

@@ -5,6 +5,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { ButtonComponent } from '../../../components';
 import { EnglishSentenceCreateStore } from '../../../data-access/english-sentence/store/english-sentence-create.store';
 import { EnglishSentenceCreateDto } from '../../../data-access/english-sentence/dtos';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+
 
 @Component({
   selector: 'english-sentence-create',
@@ -13,6 +15,7 @@ import { EnglishSentenceCreateDto } from '../../../data-access/english-sentence/
     FormsModule,
     NzInputModule,
     NzFormModule,
+    NzSelectModule,
 
     ButtonComponent
   ],
@@ -27,16 +30,19 @@ export class EnglishSentenceCreate {
   validateForm = this.fb.group({
     sentence: this.fb.control('', [Validators.required]),
     translation: this.fb.control('', [Validators.required]),
+    words: this.fb.control([]),
   });
 
+   readonly listOfOption: string[] = [];
 
   submitForm() {
     if (this.validateForm.valid) {
       const request: EnglishSentenceCreateDto = {
         sentence: this.validateForm.value.sentence || '',
         translation: this.validateForm.value.translation || '',
-
+        words: this.validateForm.value.words || []
       };
+
       this.createStore.create(request);
       this.resetForm()
 

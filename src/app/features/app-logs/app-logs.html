@@ -5,7 +5,7 @@
 
         <div class="ctn-log">
             <div class="ctn-log-main">
-                @for(i of store.logs(); track i.log) {
+                @for(i of store.logs(); track $index) {
                 <p> > <span nz-typography [nzType]="getTypeLog(i.status)">{{i.log}}</span> </p>
                 }
                 @if(store.isLoading()) {

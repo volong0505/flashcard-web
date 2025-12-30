@@ -12,7 +12,7 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
   styles: []
 })
 export class TagComponent {
-  @Input() tagText: string = 'Tag';
+  @Input() tagText: string | undefined = 'Tag';
 
   
 

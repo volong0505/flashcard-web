@@ -12,7 +12,7 @@ import { AppLogsStore } from '../../data-access/app-logs/app-logs.store';
 })
 export class AppLogs {
   readonly store = inject(AppLogsStore)
-  isOpen=true;
+  isOpen=false;
 
   openChange(): void {
    this.isOpen = !this.isOpen;

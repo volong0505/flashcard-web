@@ -3,27 +3,34 @@ import { EnglishLearningRecognition } from "./english-learning-recognition/engli
 import { EnglishLearningStore } from "../../data-access/english-learning/store/english-learning.store";
 import { EnglishLearningNew } from "./english-learning-new/english-learning-new";
 import { NoMoreFlashcardComponent } from "../../components";
+import { EnglishLearningSentenceRewriting } from "./english-learning-sentence-rewriting/english-learning-sentence-rewriting";
 
 @Component({
     selector: 'english-learning',
     imports: [
         EnglishLearningNew,
         EnglishLearningRecognition,
+        EnglishLearningSentenceRewriting,
         NoMoreFlashcardComponent
     ],
     template: `
     <div class=ctn>
 
-        @if (!state.flashcard().vocabulary._id ) {
-        <no-more-flashcard-component/>
-        }
 
-        @if (state.flashcard().vocabulary.cardType == "NEW") {
+        @if (state.flashcard().data.cardType == "NEW") {
             <english-learning-new/>
         }
 
-        @if (state.flashcard().vocabulary.cardType == "RECOGNITION") {
+        @if (state.flashcard().data.cardType == "RECOGNITION") {
             <english-learning-recognition/>
+        }
+
+        @if (state.flashcard().data.sentence?._id) {
+            <english-learning-sentence-rewriting/>
+        }
+            
+        @if (!state.flashcard().data._id && !state.flashcard().data.sentence?._id ) {
+            <no-more-flashcard-component/>
         }
      </div>
     `,

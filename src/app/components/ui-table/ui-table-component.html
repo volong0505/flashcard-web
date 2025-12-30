@@ -14,10 +14,21 @@
                 <tr>
                     @for(col of customColumn; track col.name) {
 
-                    <td>{{getValue(col.value, item._id)}}</td>
+                        @if(!col.colType ||  col.colType == 'default') {
+                            <td>{{getValue(col.value, item._id)}}</td>
+                        } 
+
+                        @if(col.colType == 'tags') {
+                            <td>
+                                @for(tag of getValue(col.value, item._id); track tag) { 
+                                    <nz-tag>{{tag}}</nz-tag>
+                                }
+
+                            </td>
+                        } 
                     }
                 </tr>
-                }
+            }
             </tbody>
         </nz-table>
 

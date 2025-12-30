@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { ButtonComponent, TagComponent } from '../../../components';
+import { ButtonComponent } from '../../../components';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { EnglishLearningStore } from '../../../data-access/english-learning/store/english-learning.store';
@@ -24,9 +24,9 @@ const inputStatusSuffix = {
 }
 
 @Component({
-  selector: 'english-learning-recognition',
+  selector: 'english-learning-sentence-rewriting',
   imports: [
-    CommonModule,
+     CommonModule,
     FormsModule,
     ReactiveFormsModule,
 
@@ -38,36 +38,34 @@ const inputStatusSuffix = {
     NzFormModule,
 
     ButtonComponent,
-    TagComponent,
   ],
-  templateUrl: './english-learning-recognition.html',
-  styleUrl: './english-learning-recognition.css',
+  templateUrl: './english-learning-sentence-rewriting.html',
+  styleUrl: './english-learning-sentence-rewriting.css',
 })
-export class EnglishLearningRecognition {
-  public readonly store = inject(EnglishLearningStore);
+export class EnglishLearningSentenceRewriting {
+ public readonly store = inject(EnglishLearningStore);
 
   isCorrect = signal(false);
   qualityNumber = signal<1 | 2 | 3 | 4>(3); // 
-  inputStatus = signal(inputStatusSuffix.default) 
-
+  inputStatus = signal(inputStatusSuffix.default);
+  showSentence = false;
   _id: string | null = null;
 
   private fb = inject(NonNullableFormBuilder);
 
   validateForm = this.fb.group({
-    word: this.fb.control(''),
+    sentence: this.fb.control(''),
   });
 
   compare(): boolean {
-    const value: string = this.validateForm.value.word || '';
+    const value: string = this.validateForm.value.sentence || '';
     
-    if (value.trim().toLowerCase() === this.store.flashcard().data.vocabulary?.word.toLowerCase().trim()) {
+    if (value.trim().toLowerCase() === this.store.flashcard().data.sentence?.sentence.toLowerCase().trim()) {
       this.isCorrect.set(true);
       this.inputStatus.set(inputStatusSuffix.correct)
       return true
     } else {
       this.inputStatus.set(inputStatusSuffix.incorrect)
-      this.qualityNumber.set(2)
       return false
     }
   }
@@ -75,6 +73,7 @@ export class EnglishLearningRecognition {
   nextFlashcard() {
     const req: GetEnglishFlashcardRequest = {
       flashcardId: this.store.flashcard().data._id,
+      sentenceId: this.store.flashcard().data.sentence?._id,
       qualityNumber: this.qualityNumber(),
     };
     this.reset();
@@ -82,9 +81,10 @@ export class EnglishLearningRecognition {
   }
 
   reset() {
-    this.validateForm.get("word")?.setValue('');
+    this.validateForm.get("sentence")?.setValue('');
     this.qualityNumber.set(3);
     this.isCorrect.set(false);
+    this.showSentence = false;
     this.inputStatus.set(inputStatusSuffix.default)
   }
 
@@ -95,12 +95,7 @@ export class EnglishLearningRecognition {
   }
 
   hint() {
-    this.validateForm.get('word')?.setValue(this.store.flashcard().data.vocabulary?.word || '');
-    this.qualityNumber.set(1)
+    this.showSentence = true
   }
 
-  memorizedClick() {
-    this.qualityNumber.set(4);
-    this.nextFlashcard();
-  }
 }

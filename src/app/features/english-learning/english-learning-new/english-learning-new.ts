@@ -27,7 +27,7 @@ export class EnglishLearningNew {
 
    nextFlashcard() {
     const params: GetEnglishFlashcardRequest = {
-      flashcardId: this.state.flashcard().vocabulary._id
+      flashcardId: this.state.flashcard().data._id
     }
     this.state.loadFlashcard(params)
    }

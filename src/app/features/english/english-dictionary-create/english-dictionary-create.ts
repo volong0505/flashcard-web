@@ -63,6 +63,7 @@ export class EnglishDictionaryCreate {
     { label: 'Adjective', value: 'adjective' },
     { label: 'Adverb', value: 'adverb' },
     { label: 'Phrasal verb', value: 'phrasal verb' },
+    { label: 'Collocation', value: 'collocation'},
     { label: 'Idiom', value: 'idiom' },
     { label: 'Structure', value: 'structure' },
     { label: 'Pronoun', value: 'pronoun' },

@@ -1,12 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 
 @Component({
   selector: 'ui-table-component',
-  imports: [NzTableModule,
-    NzPaginationModule],
+  imports: [
+    NzTableModule,
+    NzPaginationModule,
+    NzTagModule
+  ],
   templateUrl: './ui-table-component.html',
   styleUrl: './ui-table-component.css',
 })
