@@ -1,0 +1,16 @@
+
+.examples {
+    padding-left: 0.5em;
+    font-weight: 500;
+    font-style: italic;
+}
+.definition-ctn {
+    padding-top: 2em;
+     font-size: 15px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.topic-ctn {
+  padding-top: 2em;
+}

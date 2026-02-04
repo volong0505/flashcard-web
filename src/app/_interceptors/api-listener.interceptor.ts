@@ -10,6 +10,10 @@ export const apiListenerInterceptor: HttpInterceptorFn = (req, next) => {
 
  return next(req).pipe(
     map((event) => {
+      if (req.responseType === 'blob') {
+        return event;
+      }
+
       // Chỉ xử lý nếu event là HttpResponse
       if (event instanceof HttpResponse) {
         const body = event.body as any;
@@ -29,6 +33,10 @@ export const apiListenerInterceptor: HttpInterceptorFn = (req, next) => {
     tap({
       error: (err) => {
         // Xử lý lỗi toàn cục nếu cần
+        if (err.status === 200 && err.url?.includes('speak')) {
+         console.warn('Phát hiện dữ liệu Binary nhưng bị lỗi Parse, hãy kiểm tra responseType');
+      }
+
         console.error('API Error:', err);
       }
     }),

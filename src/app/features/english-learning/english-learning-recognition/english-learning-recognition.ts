@@ -2,14 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { ButtonComponent, TagComponent } from '../../../components';
+import { ButtonComponent, TagComponent, EnglishLevelComponent} from '../../../components';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { EnglishLearningStore } from '../../../data-access/english-learning/store/english-learning.store';
 import { GetEnglishFlashcardRequest } from '../../../data-access/english-learning/dtos';
-import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { TextToSpeech } from '../../text-to-speech/text-to-speech/text-to-speech';
 
 const inputStatusSuffix = {
   default: {
@@ -39,6 +40,8 @@ const inputStatusSuffix = {
 
     ButtonComponent,
     TagComponent,
+    EnglishLevelComponent,
+    TextToSpeech
   ],
   templateUrl: './english-learning-recognition.html',
   styleUrl: './english-learning-recognition.css',
@@ -102,5 +105,13 @@ export class EnglishLearningRecognition {
   memorizedClick() {
     this.qualityNumber.set(4);
     this.nextFlashcard();
+  }
+
+  split(array: string | undefined) {
+    return array?.split(";") || []
+  }
+
+  checkExistExamples(): boolean {
+    return this.store.flashcard().data.sentences.length > 0
   }
 }

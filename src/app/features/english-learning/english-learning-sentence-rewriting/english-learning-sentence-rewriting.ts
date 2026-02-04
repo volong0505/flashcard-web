@@ -10,6 +10,8 @@ import { GetEnglishFlashcardRequest } from '../../../data-access/english-learnin
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { areSentencesEqual } from '../../../_shared';
+import { TextToSpeech } from '../../text-to-speech/text-to-speech/text-to-speech';
 
 const inputStatusSuffix = {
   default: {
@@ -26,7 +28,7 @@ const inputStatusSuffix = {
 @Component({
   selector: 'english-learning-sentence-rewriting',
   imports: [
-     CommonModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
 
@@ -38,6 +40,7 @@ const inputStatusSuffix = {
     NzFormModule,
 
     ButtonComponent,
+    TextToSpeech
   ],
   templateUrl: './english-learning-sentence-rewriting.html',
   styleUrl: './english-learning-sentence-rewriting.css',
@@ -56,19 +59,6 @@ export class EnglishLearningSentenceRewriting {
   validateForm = this.fb.group({
     sentence: this.fb.control(''),
   });
-
-  compare(): boolean {
-    const value: string = this.validateForm.value.sentence || '';
-    
-    if (value.trim().toLowerCase() === this.store.flashcard().data.sentence?.sentence.toLowerCase().trim()) {
-      this.isCorrect.set(true);
-      this.inputStatus.set(inputStatusSuffix.correct)
-      return true
-    } else {
-      this.inputStatus.set(inputStatusSuffix.incorrect)
-      return false
-    }
-  }
 
   nextFlashcard() {
     const req: GetEnglishFlashcardRequest = {
@@ -91,11 +81,19 @@ export class EnglishLearningSentenceRewriting {
   onCheck() {
     if (this.compare()) {
       this.isCorrect.set(true);
+      this.inputStatus.set(inputStatusSuffix.correct)
+    } else {
+      this.inputStatus.set(inputStatusSuffix.incorrect)
     }
   }
 
   hint() {
     this.showSentence = true
+  }
+
+  compare(): boolean {
+    const value: string = this.validateForm.value.sentence || '';
+    return areSentencesEqual(value, this.store.flashcard().data.sentence?.sentence || '')
   }
 
 }

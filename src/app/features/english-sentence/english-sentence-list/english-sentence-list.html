@@ -1,7 +1,43 @@
-  <!-- <ui-table-component (pageChange)="pageChange($event)" [customColumn]="this.tableColumn" [list]="listStore.list()" [pageSize]="pageSize" [total]="listStore.total()"/> -->
- <div class="ctn">
-    <div class="table-ctn">
-  <nz-table #editRowTable  [nzData]="listStore.list()" [nzShowPagination]="false">
+<!-- <ui-table-component (pageChange)="pageChange($event)" [customColumn]="this.tableColumn" [list]="listStore.list()" [pageSize]="pageSize" [total]="listStore.total()"/> -->
+<div class="ctn">
+  <div class="table-ctn">
+    <div class="table-header">
+      <div nz-row>
+        <div nz-col nzSpan="12">
+          <div nz-flex>
+
+            <div class="btn">
+              <button-component buttonText="Create" (shareClicked)="createStore.openDrawer()" />
+            </div>
+
+            <div>
+              <form nz-form [formGroup]="searchForm" (ngSubmit)="submitForm()">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-input-group [nzSuffix]="suffixIconSearch">
+                      <input formControlName="keyword" type="text" nz-input placeholder="Search" />
+                    </nz-input-group>
+                    <ng-template #suffixIconSearch>
+                      <nz-icon nzType="search" />
+                    </ng-template>
+                  </nz-form-control>
+                </nz-form-item>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div nz-col nzSpan="12">
+          <div class="statistical">
+            <span>
+              Total: {{listStore.total()}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nz-table #editRowTable [nzData]="listStore.list()" [nzShowPagination]="false">
       <thead>
         <tr>
           <th nzWidth="35%">Sentence </th>
@@ -12,45 +48,57 @@
       </thead>
       <tbody>
         @for (data of listStore.list(); track data) {
-          <tr class="editable-row">
-            <td>
-              <div class="editable-cell" [hidden]="editId === data._id && editCol == 'sentence'" (click)="startEdit(data._id, 'sentence')">
-                {{ data.sentence }}
-              </div>
-              <textarea [hidden]="editId !== data._id  || editCol !== 'sentence'" type="text" nz-input [(ngModel)]="data.sentence" (blur)="stopEdit(data.sentence)"></textarea>
-            </td>
+        <tr class="editable-row">
+          <td>
+            <div class="editable-cell" [hidden]="editId === data._id && editCol == 'sentence'"
+              (click)="startEdit(data._id, 'sentence')">
+              {{ data.sentence }}
+            </div>
+            <textarea [hidden]="editId !== data._id  || editCol !== 'sentence'" type="text" nz-input
+              [(ngModel)]="data.sentence" (blur)="stopEdit(data.sentence)"></textarea>
+          </td>
 
-           <td>
-              <div class="editable-cell" [hidden]="editId === data._id && editCol == 'translation'" (click)="startEdit(data._id, 'translation')">
-                {{ data.translation }}
-              </div> 
-              <textarea [hidden]="editId !== data._id  || editCol !== 'translation'" type="text" nz-input [(ngModel)]="data.translation" (blur)="stopEdit(data.translation)"></textarea>
-            </td>
+          <td>
+            <div class="editable-cell" [hidden]="editId === data._id && editCol == 'translation'"
+              (click)="startEdit(data._id, 'translation')">
+              {{ data.translation }}
+            </div>
+            <textarea [hidden]="editId !== data._id  || editCol !== 'translation'" type="text" nz-input
+              [(ngModel)]="data.translation" (blur)="stopEdit(data.translation)"></textarea>
+          </td>
 
-               <td>
-              <div class="editable-cell" [hidden]="editId === data._id && editCol == 'words'" (click)="startEdit(data._id, 'words')">
-                @for(word of data.words; track word) {
-                  <tag-component [tagText]="word"/>
-                }
-              </div>
+          <td>
+            <div class="editable-cell" [hidden]="editId === data._id && editCol == 'wordIds'"
+              (click)="startEdit(data._id, 'wordIds')">
+              @for(word of data.words; track word) {
+              <tag-component [tagText]="word.word" />
+              }
+            </div>
 
-                <nz-select (nzOpenChange)="handleOpenChange($event)" [hidden]="editId !== data._id || editCol !== 'words'" nzMode="tags" [(ngModel)]="data.words"  (ngModelChange)="changeWords(data.words)">
-                @for (option of listOfOption; track option) {
-                  <nz-option [nzLabel]="option" [nzValue]="option"></nz-option>
-                }
-                </nz-select>
-            </td>
+            <nz-select (nzOnSearch)="selectOnSearch($event)" (nzOpenChange)="handleOpenChange($event)"
+              [hidden]="editId !== data._id || editCol !== 'wordIds'"  nzMode="multiple" [(ngModel)]="data.words"
+              (ngModelChange)="changeWords(data.words)">
 
-            <td>
-              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" >Delete</a>
-            </td>
-          </tr>
+              @for (option of data.words; track option._id) {
+                <nz-option [nzLabel]="option.word + ' - ' + option.translation" [nzValue]="option._id"></nz-option>
+              }
+
+              @for (option of this.wordOptionsStore.options(); track option._id) {
+              <nz-option [nzLabel]="option.word + ' - ' + option.translation" [nzValue]="option"></nz-option>
+              }
+            </nz-select>
+          </td>
+
+          <td>
+            <a nz-popconfirm nzPopconfirmTitle="Sure to delete?">Delete</a>
+          </td>
+        </tr>
         }
       </tbody>
     </nz-table>
-      <div class="pagin-ctn">
-            <nz-pagination [nzPageSize]="pageSize" [nzTotal]="listStore.total()" [nzSize]="'small'"
-                (nzPageIndexChange)="pageChange($event)"></nz-pagination>
-        </div>
-           </div>
+    <div class="pagin-ctn">
+      <nz-pagination [nzPageSize]="pageSize" [nzTotal]="listStore.total()" [nzSize]="'small'"
+        (nzPageIndexChange)="pageChange($event)"></nz-pagination>
+    </div>
+  </div>
 </div>

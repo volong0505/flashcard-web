@@ -3,13 +3,16 @@
     <div>
         <div class="card-header">
             <div>
-                <span class="word">{{state.flashcard().data.vocabulary?.translation}}</span>
+                <span class="word">{{store.flashcard().data.vocabulary?.translation}}</span>
+            </div>
+             <div class="tags">
+                <tag-component [tagText]="store.flashcard().data.vocabulary?.category" />
             </div>
 
-            <div class="tags">
-                <!-- <shared-ui-tag-component [tagText]="state.flashcard().data.vocabulary?.category" /> -->
-                
+             <div class="level">
+                <english-level-component [level]="store.flashcard().data.vocabulary?.level" />
             </div>
+
 
             <div class="check-button">
                 <button-component buttonText="Next" (shareClicked)="nextFlashcard()" />
@@ -24,13 +27,29 @@
         <div class="card-center">
 
             <div class="meaning">
-                <span>{{state.flashcard().data.vocabulary?.definition}}</span>
+                <span>{{store.flashcard().data.vocabulary?.definition}}</span>
             </div>
 
             <div class="word">
-                <h2>{{state.flashcard().data.vocabulary?.word}}</h2>
+                <h2>{{store.flashcard().data.vocabulary?.word}}</h2>
             </div>
-
         </div>
+
+                  <div>
+                <div>
+                    <span>{{store.flashcard().data.vocabulary?.ipa}}</span>
+                </div>
+
+                @if(this.checkExistExamples()) {
+                     <div class="sentences">
+                    <h3>Examples</h3>
+                    <div class="examples">
+                        @for(s of store.flashcard().data.sentences; track s._id) {
+                        <span>{{s.sentence}}</span>   
+                    }
+                    </div>
+                </div>
+                }
+            </div>
     </div>
 </nz-card>

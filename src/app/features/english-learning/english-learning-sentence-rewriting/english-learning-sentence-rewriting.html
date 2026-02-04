@@ -22,7 +22,7 @@
 
                             <nz-input-wrapper>
 
-                                <input nz-input formControlName="sentence" />
+                                <input nz-input formControlName="sentence" >
                                 <nz-icon (click)="onCheck()" nzInputSuffix [nzType]="this.inputStatus().type"
                                     [style.font-size.px]="16" [style.color]="this.inputStatus().color" />
 
@@ -48,6 +48,10 @@
         <div class="card-footer">
             <div class="hint">
                 <a class="hint-text" (click)="hint()"> <nz-icon nzType="bulb" nzTheme="outline" /> Get a hint</a>
+            </div>
+
+            <div class="speak">
+                <text-to-speech [text]="this.store.flashcard().data.sentence?.sentence"/>
             </div>
         </div>
     </div>

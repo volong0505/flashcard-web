@@ -13,5 +13,5 @@ export class EnglishSentenceListItemDto {
     _id!: string;
     sentence!: string;
     translation!: string;
-    words!: string[]
+    words!: {_id: string, word: string, translation: string}[]
 }

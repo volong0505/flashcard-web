@@ -44,3 +44,15 @@ nz-card {
   padding-top: 4em;
 
 }
+
+.level {
+  padding-top: 5px;
+}
+
+.sentences {
+  padding-top: 1em;
+}
+.examples {
+  padding-left: 0.5em;
+  font-style: italic;
+}

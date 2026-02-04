@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { AppLogs } from '../../features/app-logs/app-logs';
+// import { AppLogs } from '../../features/app-logs/app-logs';
 
 @Component({
   selector: 'app-layout',
@@ -15,7 +15,7 @@ import { AppLogs } from '../../features/app-logs/app-logs';
       NzMenuModule,
       NzLayoutModule,
 
-      AppLogs
+      // AppLogs
     ],
     standalone: true,
   templateUrl: './layout.html',

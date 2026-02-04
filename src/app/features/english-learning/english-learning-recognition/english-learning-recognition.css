@@ -12,7 +12,6 @@ nz-card {
 .card-header {
   display: inline-flex;
   margin-bottom: 4px;
-  
 }
 
 .word {
@@ -20,9 +19,14 @@ nz-card {
   font-weight: 500;
 }
 
+
 .tags {
   padding-top: 5px;
   padding-left: 1em;
+}
+
+.level {
+  padding-top: 5px;
 }
 
 .check-button {
@@ -62,9 +66,35 @@ nz-input-wrapper {
 }
 
 
+.speak {
+  position: absolute;
+  bottom: 0;
+  left: 8em;
+  padding: 0 0 1em 1em;
+}
+
+nz-icon {
+  font-size: 16px;
+}
+
 .memorized {
   position: absolute;
   bottom: 0;
   right: 0;
   padding: 0 1em 1em 0;
+}
+
+.definition {
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 400;
+  padding-top: 0.5em;
+}
+
+.sentences {
+  padding-top: 1em;
+}
+.examples {
+  padding-left: 0.5em;
+  font-style: italic;
 }

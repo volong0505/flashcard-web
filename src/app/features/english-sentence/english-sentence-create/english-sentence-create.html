@@ -1,34 +1,41 @@
-<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
-    <div nz-row [nzGutter]="24">
-        <div nz-col [nzSpan]="8">
-            <nz-form-item>
-                <nz-form-label nzFor="sentence">Sentence</nz-form-label>
-                <nz-form-control>
-                    <textarea rows="1" nz-input formControlName="sentence"></textarea>
-                </nz-form-control>
-            </nz-form-item>
-        </div>
-
-          <div nz-col [nzSpan]="8">
-            <nz-form-item>
-                <nz-form-label nzFor="sentence">Translation</nz-form-label>
-                <nz-form-control>
-                    <textarea  rows="1" nz-input formControlName="translation"></textarea>
-                </nz-form-control>
-            </nz-form-item>
-        </div>
-
-         <div nz-col [nzSpan]="4">
-             <nz-select nzMode="tags" nzPlaceHolder="Words used" formControlName="words">
-                @for (option of listOfOption; track option) {
-             <nz-option [nzLabel]="option" [nzValue]="option"></nz-option>
-      } 
-    </nz-select>
-        </div>
+<nz-drawer [nzClosable]="false" nzWidth="500px" nzPlacement="left" [nzKeyboard]="true" (nzOnClose)="closeDrawer()"
+    [nzVisible]="createStore.onCreate()">
+    <ng-container *nzDrawerContent>
+        <div>
+            <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+                
+                 <nz-form-item>
+                        <nz-form-control>
+                            <textarea formControlName="sentence" nz-input rows="1" placeholder="Sentence"
+                                nzVariant="underlined"></textarea>
+                        </nz-form-control>
+                    </nz-form-item>
 
 
-        <div nz-col [nzSpan]="4" class="button">
-          <button-component buttonText="Save" (click)="submitForm()"/>
-        </div>
-    </div>
-</form>
+                       <nz-form-item>
+                        <nz-form-control>
+                            <textarea formControlName="translation" nz-input rows="1" placeholder="Translation"
+                                nzVariant="underlined"></textarea>
+                        </nz-form-control>
+                    </nz-form-item>
+           
+                         <nz-form-item>
+                           <nz-form-control >
+                            <nz-select  (nzOnSearch)="selectOnSearch($event)" formControlName="words" nzMode="multiple" nzVariant="underlined"
+                                nzPlaceHolder="Words used">
+                        @for (option of this.wordOptionsStore.options(); track option._id) {
+                        <nz-option [nzLabel]="option.word + ' - ' + option.translation" [nzValue]="option"></nz-option>
+                                }
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+             <div>
+                    <button nz-button nzType="primary" class="submit-btn" (click)="submitForm()">
+                        <nz-icon nzType="save" />
+                        Save
+                    </button>
+                </div>
+            </form>
+            </div>
+    </ng-container>
+</nz-drawer>

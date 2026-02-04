@@ -29,13 +29,68 @@
         <div nz-col nzSpan="12">
           <div class="statistical">
             <span>
-              <!-- Total: {{store.list.total()}} -->
+              Total: {{listStore.total()}}
             </span>
           </div>
         </div>
       </div>
     </div>
 
-  <ui-table-component (pageChange)="pageChange($event)" [customColumn]="this.tableColumn" [list]="listStore.list()" [pageSize]="pageSize" [total]="listStore.total()"/>
+    <div class="ctn">
+      <div class="table-ctn">
+        @if(tableColumn && tableColumn.length > 0) {
+        <nz-table #basicTable [nzData]=" listStore.list()" [nzShowPagination]="false">
+          <thead>
+            <tr>
+              @for(col of tableColumn; track col?.name) {
+              <th [width]="col.width">{{col?.name}}</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for(item of listStore.list(); track item._id) {
+            <tr>
+              <td (click)="loadDetail(item._id)">
+                <a>
+                <nz-icon nzType="plus-square" nzTheme="outline" />
+
+                </a>
+              </td>
+              <td class="word">
+                {{item.word}}
+              </td>
+              <td class="translation">
+                {{item.translation}}
+              </td>
+           
+              <td>
+                {{item.ipa}}
+              </td>
+                <td class="center">
+                <english-category-component [category]="item.category"/>
+              </td>
+              <td class="center">
+                <english-level-component [level]="item.level" />
+              </td>
+              <td lass="center">
+                @for(topic of item.topics; track topic) {
+                <english-level-component [level]="topic" />
+                }
+              </td>
+              <td>
+                {{item.definition}}
+              </td>
+            </tr>
+            }
+          </tbody>
+        </nz-table>
+
+        <div class="pagin-ctn">
+          <nz-pagination [nzPageSize]="pageSize" [nzPageIndex]="query.page" [nzTotal]="listStore.total()"
+            [nzSize]="'small'" (nzPageIndexChange)="pageChange($event)"></nz-pagination>
+        </div>
+        }
+      </div>
+    </div>
   </div>
 </div>

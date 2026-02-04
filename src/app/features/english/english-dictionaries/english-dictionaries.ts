@@ -1,53 +1,74 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { ButtonComponent, UITableComponent } from '../../../components';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { ButtonComponent } from '../../../components';
+import { AuthSerivce } from '../../../data-access/auth/auth.service';
 import { EnglishDictionaryCreateStore } from '../../../data-access/english-dictionary/store/english-dictionary-create.store';
 import { EnglishDictionaryListStore } from '../../../data-access/english-dictionary/store/english-dictionary-list.store';
-import { AuthSerivce } from '../../../data-access/auth/auth.service';
+
+import { EnglishCategoryComponent } from '../../../components/english-category.component';
+import { EnglishLevelComponent } from '../../../components/english-level.component';
+import { EnglishDictionaryDetailStore } from '../../../data-access/english-dictionary/store/english-dictionary-detail.store';
 
 const customColumn = [
   {
+    name: "",
+    value: '',
+    width: "2%"
+  },
+  {
     name: "Word",
-    value: 'word'
+    value: 'word',
+    width: "15%"
   },
   {
     name: "Translation",
-    value: "translation"
-  },
-  {
-    name: "Category",
-    value: "category"
+    value: "translation",
+    width: "20%"
   },
   {
     name: "IPA",
-    value: "ipa"
+    value: "ipa",
+    width: "10%"
+  },
+
+    {
+    name: "Category",
+    value: "category",
+    width: "5%"
   },
   {
     name: "Level",
-    value: "level"
+    value: "level",
+    width: "5%"
   },
-
+   {
+    name: "Topics",
+    value: "topics",
+    width: "10%"
+  },
+   {
+    name: "Definition",
+    value: "definition",
+    width: "30%"
+  }
 ]
 
 
 @Component({
   selector: 'english-dictionaries',
   imports: [
-  ButtonComponent,
-
+    ButtonComponent,
     NzTableModule,
     NzButtonModule,
-    NzTagModule,
     NzIconModule,
     NzInputModule,
     NzFormModule,
@@ -57,7 +78,8 @@ const customColumn = [
     NzGridModule,
     ReactiveFormsModule,
 
-    UITableComponent
+    EnglishLevelComponent,
+    EnglishCategoryComponent
   ],
   templateUrl: './english-dictionaries.html',
   styleUrl: './english-dictionaries.css',
@@ -74,11 +96,11 @@ export class EnglishDictionaries {
   }
 
   expandSet = new Set<string>();
-  keyword: string = '';
 
   private fb = inject(NonNullableFormBuilder);
   readonly createState = inject(EnglishDictionaryCreateStore);
   readonly listStore = inject(EnglishDictionaryListStore);
+  readonly detailStore = inject(EnglishDictionaryDetailStore)
   readonly authService = inject(AuthSerivce);
 
   searchForm = this.fb.group({
@@ -96,9 +118,10 @@ export class EnglishDictionaries {
   }
 
   submitForm(): void {
-    if (this.keyword !== this.searchForm.value.keyword) {
-      this.keyword = this.searchForm.value.keyword || '';
+    if (this.query.keyword !== this.searchForm.value.keyword) {
+      this.query.keyword = this.searchForm.value.keyword || '';
     }
+    this.listStore.load(this.query)
   }
 
   pageChange($event: number) {
@@ -108,6 +131,10 @@ export class EnglishDictionaries {
 
   onEdit(id: string) {
 
+  }
+
+  loadDetail(_id: string) {
+    this.detailStore.openDrawer(_id)
   }
 
   onExpandChange(id: string, checked: boolean): void {

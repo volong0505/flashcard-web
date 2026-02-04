@@ -1,7 +1,6 @@
 
 export class EnglishDictionaryListRequest {
     keyword?: string;
-    userId!: string;
     page!: number
 }
 
@@ -17,6 +16,7 @@ export class EnglishDictionaryListItemDto {
     ipa!: string;
     definition!: string;
     level!: string;
+    topics!: string[];
     category!: string;
     usageNote!: string;
 }

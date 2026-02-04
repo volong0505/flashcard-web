@@ -1,0 +1,63 @@
+<nz-drawer [nzVisible]="detailStore.isOpen()" [nzWidth]="640" [nzClosable]="false" (nzOnClose)="close()">
+    <ng-container *nzDrawerContent>
+        @if(this.check()) {
+        <div>
+            <h2>{{detailStore.detail()?.dictionary?.word}}</h2>
+            <h3>{{detailStore.detail()?.dictionary?.translation}}</h3>
+            <english-category-component [category]="detailStore.detail()?.dictionary?.category" />
+            <english-level-component [level]="detailStore.detail()?.dictionary?.level" />
+
+            @if(detailStore.detail()?.dictionary?.definition) {
+            <div class="definition-ctn">
+                <span>{{detailStore.detail()?.dictionary?.definition}}</span>
+            </div>
+            }
+
+            @if(detailStore.detail()?.dictionary?.usageNote) {
+            <div class="definition-ctn">
+                <span>{{detailStore.detail()?.dictionary?.usageNote}}</span>
+            </div>
+            }
+
+            <div class="topic-ctn">
+                @for(topic of detailStore.detail()?.dictionary?.topics; track topic) {
+                <tag-component [tagText]="topic" />
+                }
+            </div>
+        </div>
+        <nz-divider></nz-divider>
+        <div class="sentences">
+            <nz-descriptions [nzColumn]="2" nzTitle="Examples"></nz-descriptions>
+            <div class="examples">
+                @for(s of detailStore.detail()?.sentences; track s._id) {
+                <p>{{s.sentence}}. ({{s.translation}})</p>
+                }
+            </div>
+        </div>
+        <nz-divider></nz-divider>
+        <nz-descriptions [nzColumn]="2" nzTitle="Progress">
+
+            <nz-descriptions-item nzTitle="Next review" [nzSpan]="1"> {{detailStore.detail()?.flashcard?.nextReview |
+                date:'MM/dd/yy h:mm a'}}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Ease Factor" [nzSpan]="1">{{detailStore.detail()?.flashcard?.easeFactor}}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Repetition" [nzSpan]="1">{{detailStore.detail()?.flashcard?.repetition}}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Interval" [nzSpan]="1">{{detailStore.detail()?.flashcard?.interval}}
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="State" [nzSpan]="1">{{detailStore.detail()?.flashcard?.state}}
+            </nz-descriptions-item>
+
+        </nz-descriptions>
+        }
+
+        <nz-divider></nz-divider>
+
+
+    </ng-container>
+</nz-drawer>

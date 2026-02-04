@@ -9,13 +9,17 @@
 
 .statistical {
     margin-right: 1em;
-    margin-top: 4px;
-    font-size: 15px;
+    margin-top: 1.2em;
     float: right;
 }
 
+span {
+    font-size: 15px;
+    font-weight: 500;
+}
+
 .table-header {
-    margin-bottom: -10px;
+    margin-bottom: -20px;
 }
 
 .pagin-ctn {
@@ -43,4 +47,18 @@ button {
 .bold {
     font-size: 14px;
     font-style: bold;
+}
+
+.word {
+   font-size: 15px;
+    font-weight: 500;
+}
+
+.translation {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.center {
+    text-align: center;
 }

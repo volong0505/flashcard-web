@@ -1,5 +1,6 @@
 export * from './create';
 export * from './list';
+export * from './detail'
 
 export interface EnglishDictionaryDto {
     word: string;

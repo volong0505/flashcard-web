@@ -7,13 +7,19 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
     NzTagModule
   ],
   template:`
-        <nz-tag> {{tagText}}</nz-tag>
+        <nz-tag nzColor="processing"> {{tagText}}</nz-tag>
     `,
-  styles: []
+   styles: [
+        `
+            nz-tag {
+                font-size: 12px;
+                font-weight: 500;
+                text-transform: uppercase;
+            }
+        `
+    ]
 })
 export class TagComponent {
   @Input() tagText: string | undefined = 'Tag';
-
   
-
 }

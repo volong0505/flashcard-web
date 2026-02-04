@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { ButtonComponent } from '../../../components';
+import { ButtonComponent,TagComponent, EnglishLevelComponent } from '../../../components';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { EnglishLearningStore } from '../../../data-access/english-learning/store/english-learning.store';
@@ -18,17 +18,23 @@ import { GetEnglishFlashcardRequest } from '../../../data-access/english-learnin
     NzCardModule,
 
     ButtonComponent,
+     TagComponent,
+        EnglishLevelComponent
   ],
   templateUrl: './english-learning-new.html',
   styleUrl: './english-learning-new.css',
 })
 export class EnglishLearningNew {
-   readonly state = inject(EnglishLearningStore);
+   readonly store = inject(EnglishLearningStore);
 
    nextFlashcard() {
     const params: GetEnglishFlashcardRequest = {
-      flashcardId: this.state.flashcard().data._id
+      flashcardId: this.store.flashcard().data._id
     }
-    this.state.loadFlashcard(params)
+    this.store.loadFlashcard(params)
    }
+
+     checkExistExamples(): boolean {
+    return this.store.flashcard().data.sentences.length > 0
+  }
 }

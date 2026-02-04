@@ -62,7 +62,10 @@ export class EnglishDictionaryCreate {
     { label: 'Verb', value: 'verb' },
     { label: 'Adjective', value: 'adjective' },
     { label: 'Adverb', value: 'adverb' },
+    { label: 'Phrase', value: 'phrase' },
     { label: 'Phrasal verb', value: 'phrasal verb' },
+    { label: 'Verb phrase', value: 'verb phrase' },
+    { label: 'Noun phrase', value: 'noun phrase' },
     { label: 'Collocation', value: 'collocation'},
     { label: 'Idiom', value: 'idiom' },
     { label: 'Structure', value: 'structure' },
@@ -72,12 +75,31 @@ export class EnglishDictionaryCreate {
     { label: 'Interjection', value: 'interjection' },
   ];
 
+   englishTopicsOptions = [
+    { label: 'General', value: 'General' },
+    { label: 'Business', value: 'Business' },
+    { label: 'Law', value: 'Law' },
+    { label: 'Science', value: 'Science' },
+    { label: 'Education', value: 'Education' },
+    { label: 'Agricultural', value: 'Agricultural' },
+    { label: 'Environment', value: 'Environment' },
+    { label: 'Technology', value: 'Technology' },
+    { label: 'Health', value: 'Health' },
+    { label: 'Transportation', value: 'Transportation' },
+    { label: 'Social', value: 'Social' },
+    { label: 'Feeling', value: 'Feeling' },
+    { label: 'History', value: 'History' },
+    { label: 'IELST', value: 'IELST' },
+
+   ]
+
   validateForm = this.fb.group({
     word: this.fb.control('', [Validators.required]),
     translation: this.fb.control('', [Validators.required]),
     definition: this.fb.control(''),
     ipa: this.fb.control(''),
     level: this.fb.control(''),
+    topics: this.fb.control([]),
     usageNote: this.fb.control(''),
     category: this.fb.control(''),
   });

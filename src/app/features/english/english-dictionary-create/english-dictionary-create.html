@@ -33,7 +33,7 @@
                         </nz-form-control>
                     </nz-form-item>
 
-                      <nz-form-item>
+                    <nz-form-item>
                         <nz-form-control [nzSm]="10" [nzXs]="24">
                             <nz-select class="select-left" formControlName="level" nzVariant="underlined"
                                 nzPlaceHolder="Level">
@@ -42,6 +42,7 @@
                                 <nz-option nzValue="B1" nzLabel="B1"></nz-option>
                                 <nz-option nzValue="B2" nzLabel="B2"></nz-option>
                                 <nz-option nzValue="C1" nzLabel="C1"></nz-option>
+                                <nz-option nzValue="C2" nzLabel="C2"></nz-option>
                             </nz-select>
                         </nz-form-control>
 
@@ -55,7 +56,18 @@
                         </nz-form-control>
                     </nz-form-item>
 
-                                        <nz-form-item>
+                    <nz-form-item>
+                           <nz-form-control >
+                            <nz-select formControlName="topics" nzMode="multiple" nzVariant="underlined"
+                                nzPlaceHolder="Topic">
+                                @for( category of englishTopicsOptions; track category.value) {
+                                <nz-option [nzValue]="category.value" [nzLabel]="category.label"></nz-option>
+                                }
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
                         <nz-form-control>
                             <textarea formControlName="usageNote" nz-input rows="1" placeholder="Usage Note"
                                 nzVariant="underlined"></textarea>

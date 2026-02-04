@@ -9,6 +9,7 @@ export class EnglishLearningVocabularyDto {
         ipa: string;
         usageNote: string;
         level: string;
+        topics: string[];
         category: string;
     } | null;
     sentence!: {
@@ -16,6 +17,11 @@ export class EnglishLearningVocabularyDto {
         sentence: string;
         translation: string
     } | null;
+    sentences!:  {
+        _id: string;
+        sentence: string;
+        translation: string;
+    }[];
     cardType!: string
 }
 

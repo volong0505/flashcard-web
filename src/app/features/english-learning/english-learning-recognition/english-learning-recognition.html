@@ -1,12 +1,18 @@
 <nz-card>
     <div>
         <div class="card-header">
-            <div>
-                <span class="word">{{store.flashcard().data.vocabulary?.translation}}</span>
+            <div class="word">
+                @for(trans of this.split(store.flashcard().data.vocabulary?.translation); track trans) {
+                <span>{{trans}}</span> <br>
+                }
             </div>
 
             <div class="tags">
                 <tag-component [tagText]="store.flashcard().data.vocabulary?.category" />
+            </div>
+
+             <div class="level">
+                <english-level-component [level]="store.flashcard().data.vocabulary?.level" />
             </div>
 
             <div class="check-button">
@@ -16,6 +22,9 @@
 
         <div class="card-center">
             <div>
+                <div class="definition">
+                    <span>{{store.flashcard().data.vocabulary?.definition}}</span>
+                </div>
                 <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="onCheck()">
                     <nz-form-item>
                         <nz-form-control>
@@ -25,26 +34,31 @@
                             <nz-input-wrapper>
 
                                 <input nz-input formControlName="word" />
-                                <nz-icon (click)="onCheck()" nzInputSuffix [nzType]="this.inputStatus().type" [style.font-size.px]="16"
-                                    [style.color]="this.inputStatus().color" />
-
+                                <nz-icon (click)="onCheck()" nzInputSuffix [nzType]="this.inputStatus().type"
+                                    [style.font-size.px]="16" [style.color]="this.inputStatus().color" />
                             </nz-input-wrapper>
                         </nz-form-control>
-                        
                     </nz-form-item>
-
                 </form>
-                
             </div>
-
 
             @if(this.isCorrect() == true) {
             <div class="hide">
                 <div>
                     <span>{{store.flashcard().data.vocabulary?.ipa}}</span>
                 </div>
-            </div>
 
+                @if(this.checkExistExamples()) {
+                <div class="sentences">
+                    <h3>Examples</h3>
+                    <div class="examples">
+                        @for(s of store.flashcard().data.sentences; track s._id) {
+                        <p>{{s.sentence}}. ({{s.translation}})</p>   
+                    }
+                    </div>
+                </div>
+                }
+            </div>
             }
         </div>
 
@@ -53,7 +67,12 @@
                 <a class="hint-text" (click)="hint()"> <nz-icon nzType="bulb" nzTheme="outline" /> Get a hint</a>
             </div>
 
-            @if(this.isCorrect() == true) {
+              <div class="speak">
+                <text-to-speech [text]="store.flashcard().data.vocabulary?.word"/>
+            </div>
+
+            @if(this.isCorrect() == true && store.flashcard().data.
+            cardType !== "MEMORIZED") {
             <div class="memorized" (click)="memorizedClick()">
                 <a>
                     Already memorized

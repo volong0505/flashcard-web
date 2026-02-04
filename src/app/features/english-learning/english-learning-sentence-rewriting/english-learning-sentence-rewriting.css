@@ -47,6 +47,7 @@ nz-input-wrapper {
 .card-footer {
   /* stick footer to bottom-right */
   padding-top: 2em;
+    display: inline-flex;
 
 }
 
@@ -55,5 +56,16 @@ nz-input-wrapper {
   bottom: 0;
   left: 0;
   padding: 0 0 1em 1em;
+}
+
+.speak {
+  position: absolute;
+  bottom: 0;
+  left: 8em;
+  padding: 0 0 1em 1em;
+}
+
+nz-icon {
+  font-size: 16px;
 }
 

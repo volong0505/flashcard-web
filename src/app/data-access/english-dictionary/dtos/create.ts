@@ -6,5 +6,6 @@ export class EnglishDictionaryCreateDto {
     usageNote?: string;
     ipa?: string;
     level?: string;
+    topics?: string[];
     category?: string; // part of speech and more: idiom, structure .v.v
 }
