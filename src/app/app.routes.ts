@@ -21,6 +21,10 @@ export const appRoutes: Routes = [
             {
                 path: 'library',
                 loadComponent: () => import('./pages/library/library-component').then(c => c.LibraryComponent)
+            },
+            {
+                path: 'svenska',
+                loadComponent: () => import('./pages/svenska/svenska-page').then(c => c.SvenskaPage)
             }
         ]
     },

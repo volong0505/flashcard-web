@@ -1,0 +1,64 @@
+.table-ctn {
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.btn {
+    padding-right: 1em;
+}
+
+.statistical {
+    margin-right: 1em;
+    margin-top: 1.2em;
+    float: right;
+}
+
+span {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.table-header {
+    margin-bottom: -20px;
+}
+
+.pagin-ctn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+nz-input-group {
+    width: 300px;
+    border-radius: 6px;
+
+}
+
+button {
+    background-color: rgb(35, 131, 226);
+    border-radius: 6px
+}
+
+.action {
+    text-align: center;
+    font-size: 15px;
+}
+
+.bold {
+    font-size: 14px;
+    font-style: bold;
+}
+
+.word {
+   font-size: 15px;
+    font-weight: 500;
+}
+
+.translation {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.center {
+    text-align: center;
+}

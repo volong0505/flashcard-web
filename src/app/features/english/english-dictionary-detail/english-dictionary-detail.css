@@ -5,12 +5,20 @@
     font-style: italic;
 }
 .definition-ctn {
-    padding-top: 2em;
-     font-size: 15px;
+  padding-top: 2em;
+  font-size: 15px;
   font-style: italic;
   font-weight: 500;
 }
 
 .topic-ctn {
   padding-top: 2em;
+}
+
+.related-word {
+  padding-left: 0.5em;
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  gap: 15px;
 }

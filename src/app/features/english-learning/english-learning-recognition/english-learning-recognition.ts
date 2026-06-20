@@ -114,4 +114,8 @@ export class EnglishLearningRecognition {
   checkExistExamples(): boolean {
     return this.store.flashcard().data.sentences.length > 0
   }
+
+  splitUsageNote(text: string | undefined) {
+    return text?.split("-") || []
+  }
 }

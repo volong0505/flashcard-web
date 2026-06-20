@@ -15,6 +15,12 @@ export class EnglishDictionaryDetailResponse {
         createAt: Date;
         updateAt: Date
     };
+     relatedWords: {
+        _id: string;
+        word: string;
+        translation: string;
+        category: string;
+    }[];
     sentences: {
         _id: string;
         sentence: string;

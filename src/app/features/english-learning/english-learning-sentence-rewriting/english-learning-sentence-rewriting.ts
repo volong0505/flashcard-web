@@ -83,12 +83,17 @@ export class EnglishLearningSentenceRewriting {
       this.isCorrect.set(true);
       this.inputStatus.set(inputStatusSuffix.correct)
     } else {
-      this.inputStatus.set(inputStatusSuffix.incorrect)
+      this.inputStatus.set(inputStatusSuffix.incorrect);
+      if (this.qualityNumber() != 1 ) {
+        console.log('check')
+        this.qualityNumber.set(2)
+      }
     }
   }
 
   hint() {
-    this.showSentence = true
+    this.showSentence = true;
+    this.qualityNumber.set(1)
   }
 
   compare(): boolean {

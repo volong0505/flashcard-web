@@ -28,6 +28,9 @@ export class Layout {
     },
     {
       label: 'Library', path: 'library', icon: 'folder', exact: true, hidden: false,
+    },
+    {
+      label: 'Svenska', path: 'svenska', icon: 'folder'
     }
 ]
 
