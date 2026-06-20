@@ -1,0 +1,43 @@
+<nz-drawer [nzClosable]="false" nzWidth="500px" nzPlacement="left" [nzKeyboard]="true" (nzOnClose)="closeDrawer()"
+    [nzVisible]="createState.onCreate()">
+    <ng-container *nzDrawerContent>
+
+        <div>
+            <div class="form-container">
+                <form nz-form [formGroup]="validateForm" class="login-form">
+
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input type="text" nz-input formControlName="structure" placeholder="Structure"
+                                nzVariant="underlined" /> </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input type="text" nz-input formControlName="definition" placeholder="Definition"
+                                nzVariant="underlined" />
+                        </nz-form-control>
+                    </nz-form-item>
+
+
+                      <nz-form-item>
+                        <nz-form-control>
+                            <input type="text" nz-input formControlName="formula" placeholder="Formula"
+                                nzVariant="underlined" />
+                        </nz-form-control>
+                    </nz-form-item>
+
+                </form>
+
+                <div>
+                    <button nz-button nzType="primary" class="submit-btn" (click)="submitForm()">
+                        <nz-icon nzType="save" />
+                        Save
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </ng-container>
+</nz-drawer>

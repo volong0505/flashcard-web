@@ -9,7 +9,6 @@ import { EnglishDictionaryGetOptionsRequest, EnglishDictionaryGetOptionsResponse
 export class EnglishDictionaryService {
 
     private readonly http = inject(HttpClient);
-    private readonly authService = inject(AuthSerivce);
 
     create(body: EnglishDictionaryCreateDto) {
         return this.http.post('english-dictionaries', body, {withCredentials: true })

@@ -1,0 +1,96 @@
+<!-- <div class="ctn">
+  <div class="table-ctn">
+    <div class="table-header">
+      <div nz-row>
+        <div nz-col nzSpan="12">
+          <div nz-flex>
+
+            <div class="btn">
+              <button-component buttonText="Create" (shareClicked)="createState.openDrawer()" />
+            </div>
+
+            <div>
+              <form nz-form [formGroup]="searchForm" (ngSubmit)="submitForm()">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-input-group [nzSuffix]="suffixIconSearch">
+                      <input formControlName="keyword" type="text" nz-input placeholder="Search" />
+                    </nz-input-group>
+                    <ng-template #suffixIconSearch>
+                      <nz-icon nzType="search" />
+                    </ng-template>
+                  </nz-form-control>
+                </nz-form-item>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div nz-col nzSpan="12">
+          <div class="statistical">
+            <span>
+              Total: {{listStore.total()}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ctn">
+      <div class="table-ctn">
+        @if(tableColumn && tableColumn.length > 0) {
+        <nz-table #basicTable [nzData]=" listStore.list()" [nzShowPagination]="false">
+          <thead>
+            <tr>
+              @for(col of tableColumn; track col?.name) {
+              <th [width]="col.width">{{col?.name}}</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for(item of listStore.list(); track item._id) {
+            <tr>
+              <td (click)="loadDetail(item._id)">
+                <a>
+                <nz-icon nzType="plus-square" nzTheme="outline" />
+
+                </a>
+              </td>
+              <td class="word">
+                {{item.word}}
+              </td>
+              <td class="translation">
+                {{item.translation}}
+              </td>
+           
+              <td>
+                {{item.ipa}}
+              </td>
+                <td class="center">
+                <english-category-component [category]="item.category"/>
+              </td>
+              <td class="center">
+                <english-level-component [level]="item.level" />
+              </td>
+              <td lass="center">
+                @for(topic of item.topics; track topic) {
+                <english-level-component [level]="topic" />
+                }
+              </td>
+              <td>
+                {{item.definition}}
+              </td>
+            </tr>
+            }
+          </tbody>
+        </nz-table>
+
+        <div class="pagin-ctn">
+          <nz-pagination [nzPageSize]="pageSize" [nzPageIndex]="query.page" [nzTotal]="listStore.total()"
+            [nzSize]="'small'" (nzPageIndexChange)="pageChange($event)"></nz-pagination>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div> -->

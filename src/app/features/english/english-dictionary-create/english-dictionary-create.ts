@@ -45,7 +45,6 @@ export class EnglishDictionaryCreate {
   createState = inject(EnglishDictionaryCreateStore);
   authService = inject(AuthSerivce)
 
-
   isSpinning = false;
   visible = true;
 
@@ -64,6 +63,7 @@ export class EnglishDictionaryCreate {
     { label: 'Adverb', value: 'adverb' },
     { label: 'Phrase', value: 'phrase' },
     { label: 'Phrasal verb', value: 'phrasal verb' },
+    { label: 'Modal verb', value: 'Modal verb'},
     { label: 'Verb phrase', value: 'verb phrase' },
     { label: 'Noun phrase', value: 'noun phrase' },
     { label: 'Collocation', value: 'collocation'},
@@ -78,19 +78,24 @@ export class EnglishDictionaryCreate {
    englishTopicsOptions = [
     { label: 'General', value: 'General' },
     { label: 'Business', value: 'Business' },
-    { label: 'Law', value: 'Law' },
+    { label: 'Law & Politics', value: 'Law & Politics' },
     { label: 'Science', value: 'Science' },
+    { label: 'Biology & Chemistry', value: 'Biology & Chemistry'},
     { label: 'Education', value: 'Education' },
-    { label: 'Agricultural', value: 'Agricultural' },
+    { label: "Literature", value: "Literature"},
+    { label: 'Agriculture', value: 'Agriculture' },
     { label: 'Environment', value: 'Environment' },
     { label: 'Technology', value: 'Technology' },
     { label: 'Health', value: 'Health' },
     { label: 'Transportation', value: 'Transportation' },
     { label: 'Social', value: 'Social' },
-    { label: 'Feeling', value: 'Feeling' },
+    { label: 'Emotion', value: 'Emotion' },
     { label: 'History', value: 'History' },
+    { label: 'Space', value: 'Space'},
+    { label: 'Military', value: 'Military'},
+    { label: "Animal & Livestock", value: 'Animal & Livestock'},
+    { label: 'Philosophy', value: 'Philosophy'},
     { label: 'IELST', value: 'IELST' },
-
    ]
 
   validateForm = this.fb.group({
@@ -131,7 +136,6 @@ export class EnglishDictionaryCreate {
       this.validateForm.markAllAsTouched();
     }
   }
-
 
 
   showInput(): void {

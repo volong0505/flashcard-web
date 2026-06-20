@@ -11,7 +11,7 @@
                 <tag-component [tagText]="store.flashcard().data.vocabulary?.category" />
             </div>
 
-             <div class="level">
+            <div class="level">
                 <english-level-component [level]="store.flashcard().data.vocabulary?.level" />
             </div>
 
@@ -48,13 +48,24 @@
                     <span>{{store.flashcard().data.vocabulary?.ipa}}</span>
                 </div>
 
+                @if (this.splitUsageNote(store.flashcard().data.vocabulary?.usageNote).length > 1) {
+                <div class="sentences">
+                    <h3>Usage Note</h3>
+                    <div class="examples">
+                        @for(s of this.splitUsageNote(store.flashcard().data.vocabulary?.usageNote); track s) {
+                        <p>{{s}}</p>
+                        }
+                    </div>
+                </div>
+            }
+
                 @if(this.checkExistExamples()) {
                 <div class="sentences">
                     <h3>Examples</h3>
                     <div class="examples">
                         @for(s of store.flashcard().data.sentences; track s._id) {
-                        <p>{{s.sentence}}. ({{s.translation}})</p>   
-                    }
+                        <p>{{s.sentence}}. ({{s.translation}})</p>
+                        }
                     </div>
                 </div>
                 }
@@ -67,8 +78,8 @@
                 <a class="hint-text" (click)="hint()"> <nz-icon nzType="bulb" nzTheme="outline" /> Get a hint</a>
             </div>
 
-              <div class="speak">
-                <text-to-speech [text]="store.flashcard().data.vocabulary?.word"/>
+            <div class="speak">
+                <text-to-speech [text]="store.flashcard().data.vocabulary?.word" />
             </div>
 
             @if(this.isCorrect() == true && store.flashcard().data.
