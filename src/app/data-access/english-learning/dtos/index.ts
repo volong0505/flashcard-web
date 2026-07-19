@@ -1,7 +1,12 @@
 
 export class EnglishLearningVocabularyDto {
-      _id!: string;
-    vocabulary!: {
+    flashcard: EnglishFlashcardDto;
+    nextReview: string;
+}
+
+export class EnglishFlashcardDto {
+    _id: string;
+    vocabulary: {
         _id: string;
         word: string;
         translation: string;
@@ -12,17 +17,17 @@ export class EnglishLearningVocabularyDto {
         topics: string[];
         category: string;
     } | null;
-    sentence!: {
+    sentence: {
         _id: string;
         sentence: string;
         translation: string
     } | null;
-    sentences!:  {
+    sentences: {
         _id: string;
         sentence: string;
         translation: string;
     }[];
-    cardType!: string
+    cardType: string
 }
 
 

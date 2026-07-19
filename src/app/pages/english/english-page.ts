@@ -1,19 +1,21 @@
 import { Component } from "@angular/core";
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
-import { EnglishDictionary } from '../english/english-dictionary';
-import { EnglishSentence } from '../english/english-sentence';
-import { EnglishStructure } from '../english/english-structure';
-import { SvenskaDictionaryPage } from "./svenska-dictionar-page";
+import { EnglishDictionary } from './english-dictionary';
+import { EnglishSentence } from './english-sentence';
+import { EnglishStructure } from './english-structure';
+import { EnglishLearning } from "../../features/english-learning/english-learning";
 
 @Component({
-    selector: 'svenska-page',
+    selector: 'English-page',
     standalone: true,
     imports: [
         NzTabsModule,
         RouterLink,
 
-        SvenskaDictionaryPage
+        EnglishDictionary,
+        EnglishSentence,
+        EnglishLearning
     ],
     template: `
     <nz-tabs nzLinkRouter >
@@ -21,19 +23,21 @@ import { SvenskaDictionaryPage } from "./svenska-dictionar-page";
         <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ tab: 'flashcard' }" queryParamsHandling="merge">
           Flashcard
         </a>
+        <english-learning/>
       </nz-tab>
 
       <nz-tab >
         <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ tab: 'dictionary' }" queryParamsHandling="merge">
           Dictionary
         </a>
-        <svenska-dictionary-page/>
+        <english-dictionary/>
       </nz-tab>
 
       <nz-tab>
         <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ tab: 'sentences' }" queryParamsHandling="merge">
           Sentences
         </a>
+        <english-sentence/>
       </nz-tab>
 
          <nz-tab>
@@ -53,7 +57,7 @@ import { SvenskaDictionaryPage } from "./svenska-dictionar-page";
       `
     ],
 })
-export class SvenskaPage {
+export class EnglishPage {
     constructor(
         private router: Router,
         private route: ActivatedRoute) { }
@@ -61,7 +65,7 @@ export class SvenskaPage {
     dynamicTabs: Array<{ title: string; content: string; queryParams?: Params; routerLink: string[] }> = [];
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
-            if (!params['tab']) this.router.navigate(['/svenska'], { queryParams: { tab: "one" } });
+            if (!params['tab']) this.router.navigate(['/english'], { queryParams: { tab: "flashcard" } });
         });
     }
 }
