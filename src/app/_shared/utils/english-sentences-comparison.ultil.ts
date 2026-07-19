@@ -32,6 +32,7 @@ const CONTRACTIONS_MAP: Record<string, string> = {
   "that's": "that is",
   "i've": "i have",
   "you've": "you have",
+  "we've": "we have",
   "where's": "where is",
   "what's": "what is",
   "who's": "who is",

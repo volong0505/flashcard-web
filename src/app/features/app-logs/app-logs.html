@@ -3,8 +3,8 @@
     <nz-float-button-group nzIcon="code" nzType="primary" nzTrigger="click" style="right: 190px" [nzOpen]="isOpen"
         (click)="openChange()">
 
-        <div class="ctn-log">
-            <div class="ctn-log-main">
+        <div class="ctn-log scroll-container">
+            <div class="ctn-log-main scroll-content"  #scrollContainer (scroll)="onScroll()">
                 @for(i of store.logs(); track $index) {
                 <p> > <span nz-typography [nzType]="getTypeLog(i.status)">{{i.log}}</span> </p>
                 }

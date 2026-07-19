@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-// import { AppLogs } from '../../features/app-logs/app-logs';
+import { AppLogs } from '../../features/app-logs/app-logs';
 
 @Component({
   selector: 'app-layout',
@@ -15,7 +15,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
       NzMenuModule,
       NzLayoutModule,
 
-      // AppLogs
+      AppLogs
     ],
     standalone: true,
   templateUrl: './layout.html',
@@ -23,14 +23,11 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 })
 export class Layout {
   sidebarItem = [
-    {
-      label: 'Flashcard', path: 'learn', icon: 'translation'
+     {
+      label: 'English', path: 'english', icon: 'folder', exact: true, hidden: false,
     },
     {
-      label: 'Library', path: 'library', icon: 'folder', exact: true, hidden: false,
-    },
-    {
-      label: 'Svenska', path: 'svenska', icon: 'folder'
+      label: 'Svenska', path: 'svenska', icon: 'folder', exact: false, hidden: false,
     }
 ]
 

@@ -11,16 +11,12 @@ export const appRoutes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'learn',
+                redirectTo: 'english',
                 pathMatch: 'full'
             },
-            {
-                path: 'learn',
-                loadComponent: () => import('./pages/learn/learn-component').then(c => c.Learn)
-            },  
-            {
-                path: 'library',
-                loadComponent: () => import('./pages/library/library-component').then(c => c.LibraryComponent)
+               {
+                path: 'english',
+                loadComponent: () => import('./pages/english/english-page').then(c => c.EnglishPage)
             },
             {
                 path: 'svenska',
