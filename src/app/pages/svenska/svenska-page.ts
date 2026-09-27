@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { EnglishDictionary } from '../english/english-dictionary';
 import { EnglishSentence } from '../english/english-sentence';
 import { EnglishStructure } from '../english/english-structure';
-import { SvenskaDictionaryPage } from "./svenska-dictionar-page";
+import { SvenskaDictionaryPage } from "./svenska-dictionary-page";
 
 @Component({
     selector: 'svenska-page',
