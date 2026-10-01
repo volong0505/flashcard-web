@@ -1,58 +1,19 @@
-<nz-card>
+<div>
+    <!-- <text-to-speech class="speak" [text]="sentence.sentence" /><span>{{sentence.translation}} <span> 
+        </span></span> -->
+    <nz-collapse nzGhost>
+        <nz-collapse-panel [nzHeader]="sentence.translation" [nzActive]="false">
+            <p style="margin:0;">
+                {{sentence.sentence}}
+            </p>
+        </nz-collapse-panel>
+    </nz-collapse>
+
     <div>
-        <div class="card-header">
-            <div class="sentence">
-                <span> {{this.store.flashcard().data.sentence?.translation}}
-                </span>
-            </div>
-
-            <div class="check-button">
-                <button-component [disabled]="!isCorrect()" buttonText="Next" (shareClicked)="nextFlashcard()" />
-            </div>
-        </div>
-
-        <div class="card-center">
-            <div>
-
-                <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="onCheck()">
-                    <nz-form-item>
-                        <nz-form-control>
-                            <!-- <input [(ngModel)]="value" [nzStatus]="status" (ngModelChange)="compare()" nz-input
-                                nzSize="large" [ngModelOptions]="{standalone: true}" /> -->
-
-                            <nz-input-wrapper>
-
-                                <input nz-input formControlName="sentence" >
-                                <nz-icon (click)="onCheck()" nzInputSuffix [nzType]="this.inputStatus().type"
-                                    [style.font-size.px]="16" [style.color]="this.inputStatus().color" />
-
-                            </nz-input-wrapper>
-                        </nz-form-control>
-
-                    </nz-form-item>
-
-                </form>
-
-                @if(this.showSentence) {
-                <div>
-                    <span>
-                        {{this.store.flashcard().data.sentence?.sentence}}
-                    </span>
-                </div>
-
-                }
-
-            </div>
-        </div>
-
-        <div class="card-footer">
-            <div class="hint">
-                <a class="hint-text" (click)="hint()"> <nz-icon nzType="bulb" nzTheme="outline" /> Get a hint</a>
-            </div>
-
-            <div class="speak">
-                <text-to-speech [text]="this.store.flashcard().data.sentence?.sentence"/>
-            </div>
-        </div>
+        <text-to-speech class="speak" [text]="sentence.sentence" />
+        <nz-space nzDirection="vertical" style="width: 90%">
+            <input (change)="onCheck($event)" *nzSpaceItem nz-input nzVariant="underlined" />
+        </nz-space>
+        <nz-icon [nzType]="this.inputStatus().type" nzTheme="outline" [style.color]="this.inputStatus().color" />
     </div>
-</nz-card>
+</div>

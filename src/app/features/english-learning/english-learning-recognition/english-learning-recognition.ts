@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angul
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { TextToSpeech } from '../../text-to-speech/text-to-speech/text-to-speech';
+import { areSentencesEqual } from '../../../_shared';
+import { EnglishLearningSentenceRewriting } from '../english-learning-sentence-rewriting/english-learning-sentence-rewriting';
 
 const inputStatusSuffix = {
   default: {
@@ -41,6 +43,8 @@ const inputStatusSuffix = {
     ButtonComponent,
     TagComponent,
     EnglishLevelComponent,
+    EnglishLearningSentenceRewriting,
+    
     TextToSpeech
   ],
   templateUrl: './english-learning-recognition.html',
@@ -118,4 +122,6 @@ export class EnglishLearningRecognition {
   splitUsageNote(text: string | undefined) {
     return text?.split("-") || []
   }
+
+
 }

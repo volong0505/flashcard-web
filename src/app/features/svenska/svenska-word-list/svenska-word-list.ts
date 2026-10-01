@@ -13,7 +13,7 @@ import { ButtonComponent } from '../../../components';
 
 @Component({
   selector: 'svenska-word-list',
-  imports: [  ButtonComponent,
+  imports: [ 
     NzTableModule,
     NzButtonModule,
     NzIconModule,

@@ -15,6 +15,10 @@
                 <english-level-component [level]="store.flashcard().data.vocabulary?.level" />
             </div>
 
+              <div class="speak">
+                <text-to-speech [text]="store.flashcard().data.vocabulary?.word" />
+            </div>
+
             <div class="check-button">
                 <button-component [disabled]="!isCorrect()" buttonText="Next" (shareClicked)="nextFlashcard()" />
             </div>
@@ -31,8 +35,7 @@
                             <!-- <input [(ngModel)]="value" [nzStatus]="status" (ngModelChange)="compare()" nz-input
                                 nzSize="large" [ngModelOptions]="{standalone: true}" /> -->
 
-                            <nz-input-wrapper>
-
+                            <nz-input-wrapper class="main-input">
                                 <input nz-input formControlName="word" />
                                 <nz-icon (click)="onCheck()" nzInputSuffix [nzType]="this.inputStatus().type"
                                     [style.font-size.px]="16" [style.color]="this.inputStatus().color" />
@@ -57,14 +60,16 @@
                         }
                     </div>
                 </div>
-            }
+                }
 
                 @if(this.checkExistExamples()) {
                 <div class="sentences">
-                    <h3>Examples</h3>
+                    <h3>Example</h3>
                     <div class="examples">
-                        @for(s of store.flashcard().data.sentences; track s._id) {
-                        <p>{{s.sentence}}. ({{s.translation}})</p>
+                        @for(sentence of store.flashcard().data.sentences; track sentence._id) {
+                        <div class="sentence-ctn">
+                            <english-learning-sentence-rewriting [sentence]="sentence"/>
+                        </div>
                         }
                     </div>
                 </div>
@@ -78,9 +83,7 @@
                 <a class="hint-text" (click)="hint()"> <nz-icon nzType="bulb" nzTheme="outline" /> Get a hint</a>
             </div>
 
-            <div class="speak">
-                <text-to-speech [text]="store.flashcard().data.vocabulary?.word" />
-            </div>
+          
 
             @if(this.isCorrect() == true && store.flashcard().data.
             cardType !== "MEMORIZED") {

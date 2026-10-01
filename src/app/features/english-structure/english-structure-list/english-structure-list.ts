@@ -36,7 +36,6 @@ const column = [
 @Component({
   selector: 'english-structure-list',
   imports: [
-    TagComponent,
     FormsModule,
     ReactiveFormsModule,
     ButtonComponent,

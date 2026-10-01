@@ -1,17 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { ButtonComponent } from '../../../components';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { EnglishLearningStore } from '../../../data-access/english-learning/store/english-learning.store';
-import { GetEnglishFlashcardRequest } from '../../../data-access/english-learning/dtos';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { areSentencesEqual } from '../../../_shared';
 import { TextToSpeech } from '../../text-to-speech/text-to-speech/text-to-speech';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { areSentencesEqual } from '../../../_shared';
 
 const inputStatusSuffix = {
   default: {
@@ -38,15 +37,15 @@ const inputStatusSuffix = {
     NzFlexModule,
     NzCardModule,
     NzFormModule,
-
-    ButtonComponent,
+    NzSpaceModule,
+    NzCollapseModule,
     TextToSpeech
   ],
   templateUrl: './english-learning-sentence-rewriting.html',
   styleUrl: './english-learning-sentence-rewriting.css',
 })
 export class EnglishLearningSentenceRewriting {
- public readonly store = inject(EnglishLearningStore);
+  @Input() sentence: {_id: string | null, translation: string, sentence: string};
 
   isCorrect = signal(false);
   qualityNumber = signal<1 | 2 | 3 | 4>(3); // 
@@ -60,45 +59,14 @@ export class EnglishLearningSentenceRewriting {
     sentence: this.fb.control(''),
   });
 
-  nextFlashcard() {
-    const req: GetEnglishFlashcardRequest = {
-      flashcardId: this.store.flashcard().data._id,
-      sentenceId: this.store.flashcard().data.sentence?._id,
-      qualityNumber: this.qualityNumber(),
-    };
-    this.reset();
-    this.store.loadFlashcard(req);
-  }
-
-  reset() {
-    this.validateForm.get("sentence")?.setValue('');
-    this.qualityNumber.set(3);
-    this.isCorrect.set(false);
-    this.showSentence = false;
-    this.inputStatus.set(inputStatusSuffix.default)
-  }
-
-  onCheck() {
-    if (this.compare()) {
+ onCheck(event: Event)  {
+  const target = event.target as HTMLInputElement;
+    if (areSentencesEqual(target.value, this.sentence.sentence || '')) {
       this.isCorrect.set(true);
       this.inputStatus.set(inputStatusSuffix.correct)
     } else {
-      this.inputStatus.set(inputStatusSuffix.incorrect);
-      if (this.qualityNumber() != 1 ) {
-        console.log('check')
-        this.qualityNumber.set(2)
-      }
+      this.inputStatus.set(inputStatusSuffix.incorrect)
     }
-  }
-
-  hint() {
-    this.showSentence = true;
-    this.qualityNumber.set(1)
-  }
-
-  compare(): boolean {
-    const value: string = this.validateForm.value.sentence || '';
-    return areSentencesEqual(value, this.store.flashcard().data.sentence?.sentence || '')
   }
 
 }
